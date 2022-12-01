@@ -1,8 +1,10 @@
 # print functions
 import json
+"""This file holds our print functions for use in our help commands"""
 
 
 def print_welcome_message():
+    """Prints a welcome message"""
     print('\n\tWelcome to JLOCK!\n'
           '\tby J. Matta\n'
           '\t(c) November 2022\n'
@@ -10,16 +12,19 @@ def print_welcome_message():
 
 
 def print_separation_line(line_char: chr, line_size: int):
+    """Prints separation lines between the help sections for cleaner look"""
     separation_str = line_char * line_size
     print(f'\n\t{separation_str}\n')
 
 
 def print_help_welcome():
+    """Prints a welcome message within the help command print"""
     print('\t\t', 'JLOCK Help')
     print('\t\t', '(c)2022 J. Matta ')
 
 
 def print_lock_help():
+    """Prints help for the lock command"""
     print('\t-lock'
           '\n\n\t\tUse this command to lock/encrypt a message.\n'
           '\n\t\tsyntax: jlock.py -lock <lock depth (int > 0)> <message (no spaces)>\n'
@@ -34,6 +39,7 @@ def print_lock_help():
 
 
 def print_unlock_help():
+    """Prints help for the unlock command"""
     print('\t-unlock'
           '\n\n\t\tUse this command to unlock/decrypt a message.\n'
           '\n\t\tsyntax: jlock.py -unlock <encrypted_message_filename (with file extension)>\n'
@@ -45,6 +51,7 @@ def print_unlock_help():
 
 
 def print_msg_help():
+    """Prints help for the msg command"""
     print('\t-msg'
           '\n\n\t\tUse this command to print a list of PLAINTEXT message files in the current directory.\n'
           '\n\t\tThese files contain messages that have been decoded. The files\' contents consist of only\n'
@@ -56,11 +63,13 @@ def print_msg_help():
 
 
 def extract_msg_file_content(file_name):
+    """A function to help extract file content to printed in the next function"""
     with open(file_name, 'r') as msg_fileIO:
         print(f' -> {msg_fileIO.readline()}')
 
 
 def print_msg_file_info(file_name: str):
+    """Function to print the file contents pulled from the previous function"""
     print(f'\t{file_name}', end='')
     try:
         extract_msg_file_content(file_name)
@@ -69,6 +78,7 @@ def print_msg_file_info(file_name: str):
 
 
 def print_locked_help():
+    """Print locked command help info"""
     print('\t-locked'
           '\n\n\t\tUse this command to print a list of ENCRYPTED message files in the current directory.\n'
           '\n\t\tThese files contain encoded (locked) messages. Encoded messaages will be printed below\n'
@@ -84,12 +94,14 @@ def print_locked_help():
 
 
 def extract_locked_file_content(file_name):
+    """Function to extract info from a locked file"""
     with open(file_name, 'r') as encrypt_msg_fileIO:
         json_obj = json.loads(encrypt_msg_fileIO.read())
         print(f'\t\t{json_obj["encrypted_message"]}\n')
 
 
 def print_locked_file_info(file_name: str):
+    """Function to print info pulled from the previous function"""
     print(f'\t{file_name}')
     try:
         extract_locked_file_content(file_name)
@@ -98,6 +110,7 @@ def print_locked_file_info(file_name: str):
 
 
 def print_clear_help():
+    """Print cleared command help info"""
     print('\t-clear'
           '\n\n\t\tUse this command to delete all \'lock\', \'key\', \'encrypted message\', and'
           '\n\t\t\'decrypted message\' text files the current directory.\n'
